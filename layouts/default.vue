@@ -1,8 +1,6 @@
 <template>
     <div class="main-wrapper">
-        <SideNav />
         <div class="content-wrapper">
-            <div><GlobalTopNav /></div>
             <div class="view">
                 <NuxtPage />
             </div>
@@ -22,11 +20,6 @@
         .content-wrapper {
             display: flex;
             flex-direction: column;
-            margin-left: var(--sidenav-width);
-
-            .view {
-                margin: 22px;
-            }
         }
     }
 </style>
