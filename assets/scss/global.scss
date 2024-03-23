@@ -1,0 +1,15 @@
+@import "variables";
+@import url("https://fonts.cdnfonts.com/css/dm-sans");
+@import url("https://fonts.cdnfonts.com/css/inter");
+html,
+body {
+    padding: 0;
+    margin: 0;
+    color: var(--font-color);
+
+    font-family: "DM Sans" !important;
+}
+
+.inter-font {
+    font-family: "Inter" !important;
+}

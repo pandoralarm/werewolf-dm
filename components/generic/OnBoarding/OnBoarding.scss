@@ -1,0 +1,107 @@
+.main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column-reverse;
+    }
+
+    .content {
+        flex: 1;
+        padding: 10vw;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        gap: 12px;
+
+        @media screen and (max-width: 768px) {
+            width: 90%;
+            justify-content: flex-start;
+        }
+
+        .title {
+            font-size: var(--type-hero-size);
+            font-weight: var(--type-hero-weight);
+        }
+
+        .sub {
+            font-size: var(--type-content-size);
+            max-width: 80%;
+            margin-bottom: 22px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+    }
+
+    .hero {
+        flex: 1;
+
+        max-width: 50%;
+        padding: 10vw;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @media screen and (max-width: 768px) {
+            padding: 0;
+            padding-top: 10vw;
+            max-width: 90%;
+            max-height: 30vh;
+            flex: 0;
+            .sub {
+                display: none;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            animation: phoneVibration 2s ease-in-out infinite;
+        }
+
+        .sub {
+            font-size: var(--type-content-size);
+            max-width: 80%;
+            margin-top: 22px;
+        }
+    }
+}
+
+@keyframes phoneVibration {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    30% {
+        transform: scale(1.1) rotate(1deg);
+    }
+    35% {
+        transform: scale(1.1) rotate(-2deg);
+    }
+    40% {
+        transform: scale(1.1) rotate(2deg);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
