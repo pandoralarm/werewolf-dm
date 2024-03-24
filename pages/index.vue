@@ -5,6 +5,10 @@
             <div class="progress animate">{{ condition.progressText }}</div>
             <div class="start-button" :class="{ downloading: isDownloading }" @click="runGame()"><span v-if="!isGameRunning">Mulai</span></div>
         </div>
+        <audio v-for="source in sfx_sources" :id="source.id" :loop="source.loop">
+            <source :src="source.src" type="audio/mpeg" />
+            Your browser does not support the audio element.
+        </audio>
     </div>
 </template>
 <script>
@@ -17,6 +21,43 @@
                     time: "night",
                     progressText: "Memindai Data",
                 },
+                sfx_sources: [
+                    {
+                        src: "/bgm/click.mp3",
+                        id: "click",
+                    },
+                    {
+                        src: "/bgm/day_chill.mp3",
+                        id: "day_chill",
+                        loop: true,
+                    },
+                    {
+                        src: "/bgm/day_ominous.mp3",
+                        id: "day_ominous",
+                        loop: true,
+                    },
+                    {
+                        src: "/bgm/heal.mp3",
+                        id: "heal",
+                    },
+                    {
+                        src: "/bgm/kill.mp3",
+                        id: "kill",
+                    },
+                    {
+                        src: "/bgm/night.mp3",
+                        id: "night",
+                        loop: true,
+                    },
+                    {
+                        src: "/bgm/win_human.mp3",
+                        id: "win_human",
+                    },
+                    {
+                        src: "/bgm/win_werewolf.mp3",
+                        id: "win_werewolf",
+                    },
+                ],
                 isDownloading: true,
                 isGameRunning: false,
             };
@@ -24,12 +65,16 @@
         methods: {
             runGame() {
                 this.isGameRunning = true;
+
+                this.playAudio("click");
+                this.playAudio("day_ominous");
             },
             init() {
-                const hasRunBefore = JSON.parse(localStorage.getItem("game_condition"));
+                const hasRunBefore = localStorage.getItem("game_condition");
                 // const hasRunBefore = false;
                 if (!hasRunBefore) {
-                    JSON.stringify(localStorage.setItem("game_condition", this.condition));
+                    localStorage.setItem("game_condition", JSON.stringify(this.condition));
+
                     setTimeout(() => {
                         this.condition.progressText = "Mengunduh Data";
                     }, 1000);
@@ -41,10 +86,25 @@
                     }, 10000);
                 } else {
                     setTimeout(() => {
+                        this.condition = JSON.parse(hasRunBefore);
                         this.condition.progressText = "";
                         this.isDownloading = false;
                     }, 1000);
                 }
+            },
+            playAudio(id) {
+                const audio = document.getElementById(id);
+                if (audio) {
+                    audio.volume = 0.8; // Set volume to 80%
+                    audio.play();
+                }
+            },
+            stopAllAudio() {
+                const audioElements = document.querySelectorAll("audio");
+                audioElements.forEach((audio) => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                });
             },
         },
         mounted() {
