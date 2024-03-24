@@ -140,7 +140,7 @@
                 max-height: 10vh;
 
                 .title {
-                    transform: scale(0.5);
+                    transform: scale(0.5) translateY(-1.5vh);
                 }
 
                 .progress {
