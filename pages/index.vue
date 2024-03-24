@@ -140,7 +140,7 @@
                 max-height: 10vh;
 
                 .title {
-                    font-size: 6vw;
+                    transform: scale(0.5);
                 }
 
                 .progress {
